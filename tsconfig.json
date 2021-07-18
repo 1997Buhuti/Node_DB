@@ -8,7 +8,7 @@
     "baseUrl": "./lib"
   },
   "include": [
-    "lib/**/*.ts"
+    "src/lib/**/*.ts"
   ],
   "exclude": [
     "node_modules"
