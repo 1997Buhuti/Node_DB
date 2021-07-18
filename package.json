@@ -2,9 +2,11 @@
   "name": "node-db",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/server.js",
   "scripts": {
-    "build": "rm-rf build/&& tsc"
+    "test": "ts-node ./lib/server.ts",
+    "dev": "tsc && nodemon ./dist/server.js",
+    "prod": "tsc && nodemon ./dist/server.js"
   },
   "author": "",
   "license": "ISC",
