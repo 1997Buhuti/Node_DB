@@ -1,11 +1,9 @@
-const { prodcutsArray } = require('../productsArray');
+const prodcutsArray= require('../productsArray').productsArray();
 
  const resolvers={
     Query:{
-        getProducts(){
-            return prodcutsArray
-        },
-    },
+        products:()=>prodcutsArray,
+    }
 };
 
 module.exports={resolvers};

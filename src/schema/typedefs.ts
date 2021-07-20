@@ -13,7 +13,7 @@ const typeDefs= gql`
     
     #queries
     type Query{
-        getProducts:Product
+        products:[Product]
     }
     
     #mutations

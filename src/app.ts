@@ -6,8 +6,7 @@ const {typeDefs} = require("./schema/typedefs")
 const {resolvers} = require("./schema/resolvers")
 import morgan from'morgan';
 const { ApolloServer} = require('apollo-server-express');
-//import ApolloServer from "apollo-server-express"
-const { prodcutsArray } = require('./productsArray');
+const prodcutsArray= require('./productsArray').productsArray();
 
 const app=express();
 app.use(express.json());
