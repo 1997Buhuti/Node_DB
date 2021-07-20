@@ -17,8 +17,8 @@ const typeDefs= gql`
         getAllProducts:[Product]
     }
     
-    #mutations
-    input productInput{
+    #Mutations
+    input productInput {
         id:Int
         name:String
         category:String
@@ -28,7 +28,8 @@ const typeDefs= gql`
         total:Float
     }
     type Mutation{
-        createProduct(product:productInput)
+        createProduct(product:productInput):Product
+    }
 `;
 
 module.exports={typeDefs}
