@@ -14,9 +14,21 @@ const typeDefs= gql`
     #queries
     type Query{
         products:[Product]
+        getAllProducts:[Product]
     }
     
     #mutations
+    input productInput{
+        id:Int
+        name:String
+        category:String
+        qty:Int
+        price:Float
+        discount:Float
+        total:Float
+    }
+    type Mutation{
+        createProduct(product:productInput)
 `;
 
 module.exports={typeDefs}

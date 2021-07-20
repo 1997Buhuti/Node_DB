@@ -1,5 +1,4 @@
 import express from 'express';
-import config from 'config';
 import mongoose from "mongoose";
 import Product from  "./models/products";
 const {typeDefs} = require("./schema/typedefs")
@@ -22,10 +21,6 @@ async function startServer() {
 }
 startServer();
 
-app.listen({port:3001},()=>{
-    console.log('server running on port 3001');
-});
-
 
 //mongoose connect function
 mongoose.connect(dbUri,{
@@ -33,7 +28,7 @@ mongoose.connect(dbUri,{
         useUnifiedTopology:true,
     })
     .then((result)=>{
-        app.listen(3000)
+        app.listen(3001)
         //log.info("database connected");
         console.log("database connected");
     })
@@ -52,6 +47,7 @@ app.use((req, res, next) => {
 //routes
 app.get('/',(req,res)=>{
     Product.find().then((result)=>{
+        prodcutsArray.push(result);
         res.send(result);
     }).catch((error)=>{
         console.log(error);
@@ -59,7 +55,7 @@ app.get('/',(req,res)=>{
 })
 app.get('/get-products',(req,res)=>{
     Product.find().then((result)=>{
-        //prodcutsArray.push(result);
+        prodcutsArray.push(result);
         res.send(result);
         console.log(prodcutsArray)
     }).catch((error)=>{
