@@ -1,39 +1,40 @@
 import express from 'express';
 import mongoose from "mongoose";
-import Product from  "./models/products";
+import Product from "./models/products";
+import cors from 'cors';
 const {typeDefs} = require("./schema/typedefs")
 const {resolvers} = require("./schema/resolvers")
-import morgan from'morgan';
-const { ApolloServer} = require('apollo-server-express');
-const prodcutsArray= require('./productsArray').productsArray();
+import morgan from 'morgan';
 
-const app=express();
+const {ApolloServer} = require('apollo-server-express');
+const prodcutsArray = require('./productsArray').productsArray();
+
+const app = express();
 app.use(express.json());
-app.use(express.urlencoded({extended:false}));
-const dbUri='mongodb+srv://Manakal:Buhuti2021@cluster0.x1eyy.mongodb.net/Products_DB?retryWrites=true&w=majority'
-
+app.use(express.urlencoded({extended: false}));
+const dbUri = 'mongodb+srv://Manakal:Buhuti2021@cluster0.x1eyy.mongodb.net/Products_DB?retryWrites=true&w=majority'
+//const dbUri = 'mongodb+srv://kitkatUser1:kitkat123@cluster0.9tohp.mongodb.net/KitKatStore?retryWrites=true&w=majority';
 //Appllo Server
 
 async function startServer() {
-    const server= new ApolloServer({typeDefs,resolvers});
+    const server = new ApolloServer({typeDefs, resolvers});
     await server.start();
-    server.applyMiddleware({ app });
+    server.applyMiddleware({app});
 }
+
 startServer();
 
-
 //mongoose connect function
-mongoose.connect(dbUri,{
-        useNewUrlParser:true,
-        useUnifiedTopology:true,
-    })
-    .then((result)=>{
+mongoose.connect(dbUri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
+    .then((result) => {
         app.listen(3001)
-        //log.info("database connected");
         console.log("database connected");
     })
-    .catch((error)=>{
-        console.log("models error",error);
+    .catch((error) => {
+        console.log("models error", error);
     });
 
 // middleware & static files
@@ -45,21 +46,18 @@ app.use((req, res, next) => {
 });
 
 //routes
-app.get('/',(req,res)=>{
-    Product.find().then((result)=>{
+app.options('*', cors())
+app.get('/', (req, res) => {
+    Product.find().then((result) => {
         prodcutsArray.push(result);
         res.send(result);
-    }).catch((error)=>{
+    }).catch((error) => {
         console.log(error);
     });
 })
-app.get('/get-products',(req,res)=>{
-    Product.find().then((result)=>{
-        prodcutsArray.push(result);
-        res.send(result);
-        console.log(prodcutsArray)
-    }).catch((error)=>{
-        console.log(error);
-    });
+
+app.get('/api', (req, res) => {
+    res.json({ message: "Hello from server!" });
 })
+
 

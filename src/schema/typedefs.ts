@@ -1,8 +1,9 @@
 import {gql} from "apollo-server-express"
-
-const typeDefs= gql`
+import {IProduct} from "../models/products";
+const typeDefs = gql`
     type Product{
         id:Int!
+        image:String
         name:String!
         category:String!
         qty:Int!
@@ -20,6 +21,7 @@ const typeDefs= gql`
     #Mutations
     input productInput {
         id:Int
+        image:String
         name:String
         category:String
         qty:Int
@@ -32,4 +34,4 @@ const typeDefs= gql`
     }
 `;
 
-module.exports={typeDefs}
+module.exports = {typeDefs}

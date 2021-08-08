@@ -1,5 +1,6 @@
 type products={
     id: number
+    image: string
     name: string
     category: string
     qty: number | 1
