@@ -30,7 +30,7 @@ mongoose.connect(dbUri, {
     useUnifiedTopology: true,
 })
     .then((result) => {
-        app.listen(3001)
+        app.listen(process.env.PORT||3001)
         console.log("database connected");
     })
     .catch((error) => {
