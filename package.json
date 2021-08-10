@@ -4,7 +4,13 @@
   "description": "",
   "main": "./dist/server.js",
   "scripts": {
-    "dev": "nodemon --config nodemon.json src/app.ts"
+    "dev": "nodemon --config nodemon.json src/app.ts",
+    "build-ts": "tsc",
+    "postinstall": "npm run build-ts",
+    "start": "npm run serve",
+    "serve": "node dist/server.js",
+    "watch-node": "nodemon dist/server.js",
+    "watch-ts": "tsc -w"
   },
   "author": "",
   "license": "ISC",
@@ -24,7 +30,8 @@
     "morgan": "^1.10.0",
     "nanoid": "^3.1.23",
     "pino": "^6.12.0",
-    "pino-pretty": "^5.1.1"
+    "pino-pretty": "^5.1.1",
+    "ts-node": "^10.2.0"
   },
   "devDependencies": {
     "@types/body-parser": "^1.19.1",
